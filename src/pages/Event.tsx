@@ -1,13 +1,20 @@
 import React from "react";
 
 import Header from "../components/Header";
+import Sidebar from "../components/Sidebar"
+import Video from "../components/Video"
 
 const Event = () => {
   return (
-    <header className="w-full py-5 flex items-center justify-center bg-gray-700 border-b border-gray-600">
+    <div className="flex flex-col min-h-screen">
       <Header />
-    </header>
-  );
+
+      <main className="flex flex-1">
+        <Video />
+        <Sidebar />
+      </main>
+    </div>
+  )
 };
 
 export default Event;
