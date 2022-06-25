@@ -3,6 +3,7 @@ import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Logo from "../assets/Logo";
+import ImageCodeMarkup from "../assets/image-group.png"
 
 const CREATE_SUBSCRIBER_MUTATION = gql`
   mutation CreateSubscriber($name: String!, $email: String!) {
@@ -95,7 +96,7 @@ const Subscriber = () => {
       </div>
 
       <img
-        src="src/assets/image-group.png"
+        src={ImageCodeMarkup}
         alt="imagem coder markup"
         className="mt-10"
       />
