@@ -1,5 +1,6 @@
-import { gql } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Logo from "../assets/Logo";
 
@@ -15,8 +16,32 @@ const Subscriber = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const navigate = useNavigate();
+
+  const [createSubscriber, { loading }] = useMutation(
+    CREATE_SUBSCRIBER_MUTATION
+  );
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    // await createSubscriber({
+    //   variables: {
+    //     name,
+    //     email,
+    //   },
+    // })
+    //   .then((resp) => {
+    //     console.log(resp.data);
+    //     navigate("/event");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+
+    if (name.trim().length > 0 && email.trim().length > 0) {
+      navigate("/event");
+    }
   };
 
   return (
@@ -49,12 +74,14 @@ const Subscriber = () => {
               placeholder="Seu nome completo"
               className=" bg-gray-700 rounded px-5 h-14"
               onChange={(e) => setName(e.target.value)}
+              required
             />
             <input
               type="email"
               placeholder="Digite seu e-mail"
               className=" bg-gray-700 rounded px-5 h-14"
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
 
             <button
