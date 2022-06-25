@@ -1,6 +1,24 @@
+import { gql } from "@apollo/client";
+import { FormEvent, useState } from "react";
+
 import Logo from "../assets/Logo";
 
+const CREATE_SUBSCRIBER_MUTATION = gql`
+  mutation CreateSubscriber($name: String!, $email: String!) {
+    createSubscriber(data: { name: $name, email: $email }) {
+      id
+    }
+  }
+`;
+
 const Subscriber = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
       <div className="w-full px-10 max-h-[1100px] flex justify-between items-center mt-20 mx-auto">
@@ -25,21 +43,25 @@ const Subscriber = () => {
             Inscreva se gratuitamente
           </strong>
 
-          <form action="" className="flex flex-col gap-2 w-full">
-            <input 
-                type="text" 
-                placeholder="Seu nome completo" 
-                className=" bg-gray-700 rounded px-5 h-14"
+          <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full">
+            <input
+              type="text"
+              placeholder="Seu nome completo"
+              className=" bg-gray-700 rounded px-5 h-14"
+              onChange={(e) => setName(e.target.value)}
             />
-            <input 
-                type="email" 
-                placeholder="Digite seu e-mail" 
-                className=" bg-gray-700 rounded px-5 h-14"
+            <input
+              type="email"
+              placeholder="Digite seu e-mail"
+              className=" bg-gray-700 rounded px-5 h-14"
+              onChange={(e) => setEmail(e.target.value)}
             />
 
-            <button type="submit" 
-            className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors">
-                Garantir minha vaga
+            <button
+              type="submit"
+              className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors"
+            >
+              Garantir minha vaga
             </button>
           </form>
         </div>
